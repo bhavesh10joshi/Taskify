@@ -27,7 +27,7 @@ router.post('/auth/register', async (req, res) => {
 
         const user = await User.create({ name, email, password: hashedPassword });
         res.status(201).json({
-            _id: user._id, name: user.name, email: user.email, token: generateToken(user._id as string)
+            _id: user._id, name: user.name, email: user.email, token: generateToken(user._id.toString())
         });
     } catch (e) {
         res.status(500).json({ error: 'Server error' });
@@ -39,7 +39,7 @@ router.post('/auth/login', async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (user && (await bcrypt.compare(password, user.password || ''))) {
-            res.json({ _id: user._id, name: user.name, email: user.email, token: generateToken(user._id as string) });
+            res.json({ _id: user._id, name: user.name, email: user.email, token: generateToken(user._id.toString()) });
         } else {
             res.status(401).json({ error: 'Invalid email or password' });
         }
