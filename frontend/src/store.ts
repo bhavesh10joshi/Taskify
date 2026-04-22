@@ -1,5 +1,11 @@
 import { create } from 'zustand';
 import axios from 'axios';
+import { API_BASE_URL } from './config';
+
+// Configure Axios Defaults
+if (API_BASE_URL) {
+    axios.defaults.baseURL = API_BASE_URL;
+}
 
 // Configure Axios Interceptor to auto-attach token
 axios.interceptors.request.use((config) => {
