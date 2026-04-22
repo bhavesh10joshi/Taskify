@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #ba9eff;
+  --color-primary-container: #ae8dff;
+  --color-secondary: #53ddfc;
+  --color-secondary-dim: #40ceed;
+  --color-tertiary: #ec63ff;
+  --color-tertiary-dim: #ec63ff;
+  --color-surface: #070d1f;
+  --color-on-surface: #dfe4fe;
+  --color-on-surface-variant: #a5aac2;
+  --color-surface-container-high: #171f36;
+  --color-surface-container-highest: #1c253e;
+  
+  --font-headline: Manrope, sans-serif;
+  --font-body: Inter, sans-serif;
+  --font-display: Manrope, sans-serif;
+  --font-label: Inter, sans-serif;
+}
+
+@layer base {
+  body {
+    min-height: max(884px, 100dvh);
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+  }
+}
+
+@layer components {
+  .glass-panel {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+  }
+  .progress-streak {
+      position: relative;
+      overflow: hidden;
+  }
+  .progress-streak::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      filter: blur(4px);
+      background: inherit;
+  }
+}

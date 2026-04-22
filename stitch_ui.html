@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Performance Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#f487ff",
+                        "on-secondary": "#004b58",
+                        "tertiary-fixed-dim": "#ef6eff",
+                        "outline-variant": "#41475b",
+                        "surface-tint": "#ba9eff",
+                        "on-tertiary-fixed": "#300038",
+                        "surface": "#070d1f",
+                        "on-secondary-fixed-variant": "#005969",
+                        "outline": "#6f758b",
+                        "surface-container-high": "#171f36",
+                        "tertiary": "#ec63ff",
+                        "tertiary-container": "#de4bf4",
+                        "error-dim": "#d73357",
+                        "on-primary": "#39008c",
+                        "surface-container": "#11192e",
+                        "secondary": "#53ddfc",
+                        "inverse-on-surface": "#4f5469",
+                        "on-secondary-fixed": "#003a45",
+                        "surface-bright": "#222b47",
+                        "tertiary-dim": "#ec63ff",
+                        "on-tertiary-fixed-variant": "#660075",
+                        "inverse-surface": "#faf8ff",
+                        "on-surface-variant": "#a5aac2",
+                        "inverse-primary": "#6e3bd7",
+                        "primary-container": "#ae8dff",
+                        "primary-fixed-dim": "#a27cff",
+                        "secondary-fixed-dim": "#48d4f3",
+                        "on-error": "#490013",
+                        "surface-variant": "#1c253e",
+                        "surface-dim": "#070d1f",
+                        "on-tertiary": "#3d0047",
+                        "primary-dim": "#8455ef",
+                        "on-primary-container": "#2b006e",
+                        "primary": "#ba9eff",
+                        "error": "#ff6e84",
+                        "on-primary-fixed": "#000000",
+                        "on-background": "#dfe4fe",
+                        "primary-fixed": "#ae8dff",
+                        "secondary-container": "#00687a",
+                        "on-error-container": "#ffb2b9",
+                        "secondary-dim": "#40ceed",
+                        "on-tertiary-container": "#19001e",
+                        "on-surface": "#dfe4fe",
+                        "error-container": "#a70138",
+                        "surface-container-low": "#0c1326",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-fixed-variant": "#370086",
+                        "on-secondary-container": "#ecfaff",
+                        "secondary-fixed": "#65e1ff",
+                        "background": "#070d1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "display": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-streak {
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-streak::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            filter: blur(4px);
+            background: inherit;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary-container/30">
+<!-- Top Navigation Anchor -->
+<header class="bg-[#070d1f]/60 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] docked full-width top-0 z-40 fixed">
+<div class="flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-white/10">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Modern professional portrait of a person in cinematic lighting with deep shadows and soft highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYIkHEAo84Do53Hv-k19oXG9KcOcYd_kuJWQiJ4IKmxAx1-ha-iLRu4ySLn-OFJ6CNsZAa6wiyhU35BwCeelb68MC9nwmd_1r2Xv9kDJa5gr1tgQIdXIEyPjpwvxIzFiVgdBztOHWr3rQZuaWFxmx-5Olxcemg8JYRqnJEGlands1Xb3BH__OXVGFigjijdoDwCuFNQPXaInwe4M0OlBlG51_k8OKbT_SQ1HpQC4wN6Xi3blYRkmI_6KUtlU63aWa9Qhl18zzsCzmb"/>
+</div>
+<h1 class="font-['Manrope'] tracking-tight font-bold text-slate-100 text-lg">Welcome back, Alex</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-[#ba9eff] hover:bg-white/5 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-md mx-auto space-y-8">
+<!-- Hero AI Quote -->
+<section class="space-y-2">
+<p class="text-on-surface-variant text-sm font-medium tracking-wide uppercase">Daily Spark</p>
+<div class="glass-panel p-6 rounded-2xl border border-white/5">
+<p class="text-lg font-headline font-semibold text-slate-50 italic leading-relaxed">
+                    "Consistency is the bridge between goals and accomplishment."
+                </p>
+<div class="mt-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span class="text-xs font-bold tracking-widest uppercase">AI Insight</span>
+</div>
+</div>
+</section>
+<!-- Tomorrow's Focus (Daily Tasks) -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h2 class="text-2xl font-headline font-bold text-slate-50 tracking-tight">Tomorrow</h2>
+<span class="text-on-surface-variant text-sm pb-1">Oct 24</span>
+</div>
+<div class="space-y-3">
+<!-- Task Card 1 -->
+<div class="glass-panel p-4 rounded-xl border border-white/5 flex items-center justify-between group active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-lg border-2 border-primary/40 flex items-center justify-center text-primary">
+<!-- Unchecked state -->
+</div>
+<span class="text-slate-100 font-medium">Deep Work Session</span>
+</div>
+<span class="text-xs text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">2h</span>
+</div>
+<!-- Task Card 2 -->
+<div class="glass-panel p-4 rounded-xl border border-white/5 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-lg bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="text-slate-100 font-medium line-through opacity-50">Gym Workout</span>
+</div>
+<span class="text-xs text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">60m</span>
+</div>
+<!-- Task Card 3 -->
+<div class="glass-panel p-4 rounded-xl border border-white/5 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-lg border-2 border-primary/40 flex items-center justify-center text-primary"></div>
+<span class="text-slate-100 font-medium">Read 20 pages</span>
+</div>
+<span class="text-xs text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Daily</span>
+</div>
+</div>
+</section>
+<!-- Monthly Goals (Progress Streaks) -->
+<section class="space-y-4">
+<h2 class="text-2xl font-headline font-bold text-slate-50 tracking-tight">Monthly Goals</h2>
+<div class="glass-panel p-6 rounded-2xl border border-white/5 space-y-6">
+<!-- Goal 1 -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm font-medium">
+<span class="text-slate-100">UI Design Skill</span>
+<span class="text-secondary">75%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[75%] bg-gradient-to-r from-secondary to-secondary-dim progress-streak shadow-[0_0_10px_rgba(83,221,252,0.3)] rounded-full"></div>
+</div>
+</div>
+<!-- Goal 2 -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm font-medium">
+<span class="text-slate-100">Fitness Target</span>
+<span class="text-tertiary">40%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[40%] bg-gradient-to-r from-tertiary to-tertiary-dim progress-streak shadow-[0_0_10px_rgba(236,99,255,0.3)] rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Consistency Analytics (Heatmap) -->
+<section class="space-y-4">
+<h2 class="text-2xl font-headline font-bold text-slate-50 tracking-tight">Consistency</h2>
+<div class="glass-panel p-6 rounded-2xl border border-white/5">
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">7-Day Streak</span>
+<span class="text-xs text-primary font-bold">Lvl 14 Kineticist</span>
+</div>
+<div class="flex justify-between gap-2">
+<!-- Heatmap Blocks -->
+<div class="flex-1 aspect-square rounded-lg bg-surface-container-highest flex items-center justify-center opacity-40">
+<span class="text-[10px] font-bold">M</span>
+</div>
+<div class="flex-1 aspect-square rounded-lg bg-primary-container/20 border border-primary/20 flex items-center justify-center">
+<span class="text-[10px] font-bold">T</span>
+</div>
+<div class="flex-1 aspect-square rounded-lg bg-primary-container/40 border border-primary/40 flex items-center justify-center">
+<span class="text-[10px] font-bold">W</span>
+</div>
+<div class="flex-1 aspect-square rounded-lg bg-primary-container/60 border border-primary/60 flex items-center justify-center">
+<span class="text-[10px] font-bold">T</span>
+</div>
+<div class="flex-1 aspect-square rounded-lg bg-primary-container/80 border border-primary flex items-center justify-center">
+<span class="text-[10px] font-bold">F</span>
+</div>
+<div class="flex-1 aspect-square rounded-lg bg-primary border-2 border-white/20 shadow-[0_0_15px_rgba(186,158,255,0.4)] flex items-center justify-center">
+<span class="text-[10px] font-bold">S</span>
+</div>
+<div class="flex-1 aspect-square rounded-lg bg-surface-container-highest flex items-center justify-center opacity-20">
+<span class="text-[10px] font-bold">S</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Thoughts -->
+<section class="space-y-4">
+<h2 class="text-2xl font-headline font-bold text-slate-50 tracking-tight">Quick Thoughts</h2>
+<div class="glass-panel p-1 rounded-2xl border border-white/5">
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-slate-200 placeholder:text-on-surface-variant/40 p-4 min-h-[120px] resize-none font-body" placeholder="Capture a spark of genius..."></textarea>
+<div class="px-4 pb-4 flex justify-end">
+<button class="bg-gradient-to-tr from-primary to-primary-container text-on-primary-container px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">save</span>
+                        Save Note
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-6 left-0 right-0 z-50 flex justify-around items-center max-w-md mx-auto px-4 py-2 bg-white/5 backdrop-blur-3xl w-[90%] rounded-full border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
+<a class="bg-gradient-to-tr from-[#ba9eff] to-[#ae8dff] text-white rounded-full p-3 shadow-[0_0_15px_rgba(186,158,255,0.4)] active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</a>
+<a class="text-slate-400 p-3 hover:text-slate-200 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">target</span>
+</a>
+<a class="text-slate-400 p-3 hover:text-slate-200 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+</a>
+<a class="text-slate-400 p-3 hover:text-slate-200 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+</a>
+<a class="text-slate-400 p-3 hover:text-slate-200 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+</nav>
+</body></html>
