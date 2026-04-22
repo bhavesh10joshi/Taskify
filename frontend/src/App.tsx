@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Bell, Target, Calendar, BarChart2, Settings, LayoutDashboard, LogOut } from 'lucide-react';
+import { Target, Calendar, BarChart2, Settings, LayoutDashboard, LogOut } from 'lucide-react';
 import { useStore } from './store';
 import { AnimatePresence } from 'framer-motion';
 
