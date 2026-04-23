@@ -15,6 +15,11 @@ const generateToken = (id: string) => {
     });
 };
 
+// --- HEALTH ROUTE ---
+router.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // --- AUTH ROUTER ---
 router.post('/auth/register', async (req, res) => {
     const { name, email, password } = req.body;
