@@ -19,14 +19,14 @@ const TargetView = () => {
     };
 
     return (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8 pb-32">
-            <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
-                    <Target size={24} />
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6 pb-32 h-[calc(100vh-100px)] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
+                    <Target size={20} />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-headline font-bold text-slate-50">Current Targets</h2>
-                    <p className="text-sm text-on-surface-variant">Stay consistent and track your macros.</p>
+                    <h2 className="text-xl font-headline font-bold text-slate-50">Current Targets</h2>
+                    <p className="text-xs text-on-surface-variant">Stay consistent and track your macros.</p>
                 </div>
             </div>
 
@@ -34,13 +34,13 @@ const TargetView = () => {
                 {goals.map((goal, i) => {
                     const percent = Math.min(100, Math.round((goal.currentValue / goal.targetValue) * 100));
                     return (
-                        <div key={goal._id} className="glass-panel p-6 rounded-2xl border border-white/5 space-y-4 group relative">
-                            <button onClick={() => deleteGoal(goal._id)} className="absolute top-4 right-4 text-slate-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <Trash2 size={16} />
+                        <div key={goal._id} className="glass-panel p-4 rounded-xl border border-white/5 space-y-3 group relative">
+                            <button onClick={() => deleteGoal(goal._id)} className="absolute top-3 right-3 text-slate-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <Trash2 size={14} />
                             </button>
-                            <div className="flex justify-between items-center text-sm font-medium pr-8">
-                                <span className="text-slate-100 text-lg font-headline">{goal.title}</span>
-                                <span className={i % 2 === 0 ? "text-secondary text-lg" : "text-tertiary text-lg"}>
+                            <div className="flex justify-between items-center text-sm font-medium pr-6">
+                                <span className="text-slate-100 text-base font-headline">{goal.title}</span>
+                                <span className={i % 2 === 0 ? "text-secondary text-base" : "text-tertiary text-base"}>
                                     {percent}%
                                 </span>
                             </div>
@@ -56,10 +56,10 @@ const TargetView = () => {
                                     }`}>
                                 </motion.div>
                             </div>
-                            <div className="flex justify-between items-center text-xs text-slate-500 font-bold tracking-wider pt-2">
+                            <div className="flex justify-between items-center text-[10px] text-slate-500 font-bold tracking-wider pt-1">
                                 <span>{goal.currentValue} / {goal.targetValue}</span>
-                                <button onClick={() => updateGoalProgress(goal._id, goal.currentValue + 1)} className="flex items-center gap-1 text-primary bg-primary/10 px-3 py-1.5 rounded-lg hover:bg-primary/20 transition-colors">
-                                    <TrendingUp size={14} /> +1 Progress
+                                <button onClick={() => updateGoalProgress(goal._id, goal.currentValue + 1)} className="flex items-center gap-1 text-primary bg-primary/10 px-2 py-1 rounded hover:bg-primary/20 transition-colors">
+                                    <TrendingUp size={12} /> +1 Progress
                                 </button>
                             </div>
                         </div>

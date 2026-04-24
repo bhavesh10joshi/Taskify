@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import apiRoutes from './routes/api';
+import openaiRoutes from './routes/openai';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', apiRoutes);
+app.use('/api/openai', openaiRoutes);
 
 const connectDB = async () => {
     try {

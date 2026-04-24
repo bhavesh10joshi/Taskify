@@ -15,7 +15,7 @@ const AnalyticsView = () => {
         : 0;
 
     return (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8 pb-32">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8 pb-32 h-[calc(100vh-100px)] overflow-y-auto pr-2 custom-scrollbar">
             <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary shadow-[0_0_15px_rgba(83,221,252,0.2)]">
                     <BarChart size={24} />

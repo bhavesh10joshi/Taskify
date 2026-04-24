@@ -9,13 +9,17 @@ import CalendarView from './views/CalendarView';
 import AnalyticsView from './views/AnalyticsView';
 import SettingsView from './views/SettingsView';
 import AuthView from './views/AuthView';
+import { ChatbotWidget } from './components/ChatbotWidget';
 
 function App() {
-    const { user, token, fetchInsights, logout } = useStore();
+    const { user, token, fetchInsights, fetchDailyQuote, dailyQuote, logout } = useStore();
     const [activeTab, setActiveTab] = useState('dashboard');
 
     useEffect(() => {
-        if (token) fetchInsights();
+        if (token) {
+            fetchInsights();
+            fetchDailyQuote();
+        }
     }, [token]);
 
     if (!token) {
@@ -55,9 +59,9 @@ function App() {
     );
 
     return (
-        <div className="dark min-h-screen selection:bg-primary-container/30 flex flex-col md:flex-row relative overflow-hidden bg-[#070d1f]">
+        <div className="dark h-screen selection:bg-primary-container/30 flex flex-col md:flex-row relative overflow-hidden bg-[#070d1f]">
             {/* Desktop Sidebar (Hidden on Mobile) */}
-            <aside className="hidden md:flex flex-col w-64 border-r border-white/5 bg-surface-container-high/40 backdrop-blur-3xl min-h-screen p-6 z-50 sticky top-0">
+            <aside className="hidden md:flex flex-col w-64 border-r border-white/5 bg-surface-container-high/40 backdrop-blur-3xl h-screen p-6 z-50 sticky top-0">
                 <div className="flex items-center gap-3 mb-12">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-background font-bold text-xl shadow-[0_0_20px_rgba(186,158,255,0.3)]">
                         T
@@ -84,7 +88,13 @@ function App() {
             </aside>
 
             {/* Main Content Area */}
-            <div className="flex-1 flex flex-col min-h-screen w-full md:max-w-[calc(100vw-256px)]">
+            <div className="flex-1 flex flex-col h-screen w-full md:max-w-[calc(100vw-256px)] overflow-hidden">
+                {/* Daily Quote Banner */}
+                {dailyQuote && (
+                    <div className="bg-gradient-to-r from-primary/10 via-primary-container/10 to-transparent border-b border-white/5 px-6 py-2 flex items-center justify-center text-center">
+                        <p className="text-sm font-medium text-primary italic max-w-2xl">"{dailyQuote}"</p>
+                    </div>
+                )}
                 {/* Mobile Header (Hidden on Desktop) */}
                 <header className="md:hidden bg-[#070d1f]/60 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] sticky top-0 z-40 w-full px-6 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
@@ -99,7 +109,7 @@ function App() {
                 </header>
 
                 {/* Dashboard Spread (Responsive Grid scaling) */}
-                <main className="flex-1 p-6 lg:p-12 w-full max-w-7xl mx-auto relative z-10 overflow-y-auto mb-24 md:mb-0">
+                <main className="flex-1 p-6 lg:p-12 w-full max-w-7xl mx-auto relative z-10 overflow-hidden mb-24 md:mb-0">
                     <AnimatePresence mode="wait">
                         {activeTab === 'dashboard' && <DashboardView key="dashboard" />}
                         {activeTab === 'target' && <TargetView key="target" />}
@@ -114,6 +124,8 @@ function App() {
             <nav className="md:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-around items-center px-4 py-2 bg-slate-900/90 backdrop-blur-xl w-[92%] mx-auto rounded-full border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
                 <NavItems />
             </nav>
+
+            <ChatbotWidget />
         </div>
     );
 }

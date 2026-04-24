@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Plus, Trash2, Target } from 'lucide-react';
+import { Check, Plus, Trash2, Target, Copy } from 'lucide-react';
 import { useStore } from '../store';
 
 const DashboardView = () => {
-    const { tasks, goals, toggleTask, addTask, deleteTask } = useStore();
+    const { tasks, goals, toggleTask, addTask, deleteTask, copyTasksToTomorrow } = useStore();
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [isTomorrow, setIsTomorrow] = useState(false);
     const [selectedGoalId, setSelectedGoalId] = useState('');
@@ -78,24 +78,29 @@ const DashboardView = () => {
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col xl:flex-row gap-8 xl:gap-12 relative min-h-full pb-40 xl:pb-0">
             {/* Desktop Left: Today */}
-            <div className="flex-1 space-y-4">
+            <div className="flex-1 space-y-4 flex flex-col h-[calc(100vh-140px)]">
                 <div className="flex justify-between items-end border-b border-white/10 pb-4">
                     <h2 className="text-3xl font-headline font-bold text-slate-50 tracking-tight">Today's Focus</h2>
-                    <span className="text-on-surface-variant font-medium">{today.toLocaleDateString('en-US', { month: 'short', day: 'numeric'})}</span>
+                    <div className="flex items-center gap-4">
+                        <button onClick={copyTasksToTomorrow} title="Copy to Tomorrow" className="text-slate-400 hover:text-primary transition-colors flex items-center gap-1 text-sm font-medium">
+                            <Copy size={16} /> <span className="hidden sm:inline">Copy to Tomorrow</span>
+                        </button>
+                        <span className="text-on-surface-variant font-medium">{today.toLocaleDateString('en-US', { month: 'short', day: 'numeric'})}</span>
+                    </div>
                 </div>
-                <div className="space-y-3 pt-2">
+                <div className="space-y-3 pt-2 overflow-y-auto flex-1 pb-32 pr-2">
                     {todayTasks.length === 0 && <div className="text-slate-500 text-sm italic py-8 text-center bg-surface-container-highest/20 rounded-xl border border-white/5">No tasks scheduled for today. Take a breather.</div>}
                     {todayTasks.map(task => <TaskCard key={task._id} task={task} />)}
                 </div>
             </div>
 
             {/* Desktop Right: Tomorrow */}
-            <div className="flex-1 space-y-4">
+            <div className="flex-1 space-y-4 flex flex-col h-[calc(100vh-140px)]">
                 <div className="flex justify-between items-end border-b border-white/10 pb-4">
                     <h2 className="text-3xl font-headline font-bold text-slate-400 tracking-tight">Plan Tomorrow</h2>
                     <span className="text-on-surface-variant font-medium">{tomorrow.toLocaleDateString('en-US', { month: 'short', day: 'numeric'})}</span>
                 </div>
-                <div className="space-y-3 pt-2">
+                <div className="space-y-3 pt-2 overflow-y-auto flex-1 pb-32 pr-2">
                     {tomorrowTasks.length === 0 && <div className="text-slate-500 text-sm italic py-8 text-center bg-surface-container-highest/20 rounded-xl border border-white/5">No tasks queued up. Start plotting your next move.</div>}
                     {tomorrowTasks.map(task => <TaskCard key={task._id} task={task} />)}
                 </div>

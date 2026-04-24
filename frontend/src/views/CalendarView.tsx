@@ -22,7 +22,7 @@ const CalendarView = () => {
     });
 
     return (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8 pb-32">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8 pb-32 h-[calc(100vh-100px)] overflow-y-auto pr-2 custom-scrollbar">
             <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-2xl bg-tertiary/10 flex items-center justify-center text-tertiary">
                     <CalendarIcon size={24} />

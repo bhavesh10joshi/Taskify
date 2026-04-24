@@ -22,6 +22,7 @@ interface State {
     tasks: any[];
     goals: any[];
     note: any;
+    dailyQuote: string | null;
     
     // Auth actions
     register: (name: string, email: string, pass: string) => Promise<boolean>;
@@ -30,6 +31,8 @@ interface State {
 
     // Data actions
     fetchInsights: () => Promise<void>;
+    fetchDailyQuote: () => Promise<void>;
+    copyTasksToTomorrow: () => Promise<void>;
     addTask: (title: string, date: Date, goalId?: string) => Promise<void>;
     toggleTask: (id: string, isCompleted: boolean) => Promise<void>;
     deleteTask: (id: string) => Promise<void>;
@@ -47,6 +50,7 @@ export const useStore = create<State>((set, get) => ({
     tasks: [],
     goals: [],
     note: { content: '' },
+    dailyQuote: null,
 
     register: async (name, email, password) => {
         try {
@@ -93,6 +97,37 @@ export const useStore = create<State>((set, get) => ({
             if (e.response?.status === 401) {
                 get().logout();
             }
+        }
+    },
+    fetchDailyQuote: async () => {
+        try {
+            const res = await axios.get('/api/openai/quote');
+            set({ dailyQuote: res.data.quote });
+        } catch (e) { console.error("Failed to fetch quote", e); }
+    },
+    copyTasksToTomorrow: async () => {
+        const { tasks, addTask } = get();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const taskDate = (dateStr: any) => {
+            const d = new Date(dateStr || new Date());
+            d.setHours(0, 0, 0, 0);
+            return d.getTime();
+        };
+
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+
+        const todayTasks = tasks.filter(t => {
+            const td = taskDate(t.date);
+            return td === today.getTime() || (td < today.getTime() && !t.isCompleted);
+        });
+
+        // Duplicate the tasks to tomorrow
+        for (const task of todayTasks) {
+            await addTask(task.title, tomorrow, task.goalId);
         }
     },
     addTask: async (title, date, goalId) => {
