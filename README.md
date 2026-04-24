@@ -18,6 +18,15 @@ Taskify is a comprehensive, full-stack productivity suite built primarily for pe
 - JSON Web Tokens (JWT) & Bcrypt (Authentication/Security)
 - Zod (Schema Validation)
 
+## Images
+<img width="1919" height="925" alt="Screenshot 2026-04-23 110123" src="https://github.com/user-attachments/assets/5e940b8e-4d88-4c17-9fb5-a243b50189c7" />
+<img width="1919" height="925" alt="Screenshot 2026-04-23 110111" src="https://github.com/user-attachments/assets/8eb976a1-9274-4cf1-9d3a-a6a77fdb846b" />
+<img width="1919" height="925" alt="Screenshot 2026-04-23 110101" src="https://github.com/user-attachments/assets/a27da3e0-b23c-49ac-bb68-3d6f4ff98a9c" />
+<img width="1919" height="925" alt="Screenshot 2026-04-23 110053" src="https://github.com/user-attachments/assets/29743b27-7244-4a85-b942-73daeb370efe" />
+<img width="1919" height="929" alt="Screenshot 2026-04-23 110132" src="https://github.com/user-attachments/assets/64a01b7c-4c06-463c-a83c-3fe1e6a4a1d2" />
+
+
+
 ## 💡 Features & Usage
 
 1. **Authentication**: Secure your environment by creating an account. The suite utilizes encrypted passwords and JWT to lock down all your targets.
