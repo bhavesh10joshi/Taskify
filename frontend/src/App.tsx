@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Target, Calendar, BarChart2, Settings, LayoutDashboard, LogOut } from 'lucide-react';
+import { Target, Calendar, BarChart2, Settings, LayoutDashboard, LogOut, Timer } from 'lucide-react';
 import { useStore } from './store';
 import { AnimatePresence } from 'framer-motion';
 
@@ -9,6 +9,7 @@ import CalendarView from './views/CalendarView';
 import AnalyticsView from './views/AnalyticsView';
 import SettingsView from './views/SettingsView';
 import AuthView from './views/AuthView';
+import FocusView from './views/FocusView';
 import { ChatbotWidget } from './components/ChatbotWidget';
 
 function App() {
@@ -44,6 +45,11 @@ function App() {
                 onClick={() => setActiveTab('calendar')} 
                 className={`flex items-center gap-4 p-3 rounded-xl transition-all duration-150 active:scale-95 w-full ${activeTab === 'calendar' ? 'bg-gradient-to-tr from-[#ba9eff] to-[#ae8dff] text-white shadow-[0_0_15px_rgba(186,158,255,0.4)] md:translate-x-2' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}>
                 <Calendar size={20} /> <span className="hidden md:block font-medium">Schedule</span>
+            </button>
+            <button 
+                onClick={() => setActiveTab('focus')} 
+                className={`flex items-center gap-4 p-3 rounded-xl transition-all duration-150 active:scale-95 w-full ${activeTab === 'focus' ? 'bg-gradient-to-tr from-[#ba9eff] to-[#ae8dff] text-white shadow-[0_0_15px_rgba(186,158,255,0.4)] md:translate-x-2' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}>
+                <Timer size={20} /> <span className="hidden md:block font-medium">Focus</span>
             </button>
             <button 
                 onClick={() => setActiveTab('analytics')} 
@@ -114,6 +120,7 @@ function App() {
                         {activeTab === 'dashboard' && <DashboardView key="dashboard" />}
                         {activeTab === 'target' && <TargetView key="target" />}
                         {activeTab === 'calendar' && <CalendarView key="calendar" />}
+                        {activeTab === 'focus' && <FocusView key="focus" />}
                         {activeTab === 'analytics' && <AnalyticsView key="analytics" />}
                         {activeTab === 'settings' && <SettingsView key="settings" />}
                     </AnimatePresence>
